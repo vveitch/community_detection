@@ -1,0 +1,1324 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+%% First, set up margins and load colors
+\setlength{\marginparwidth}{1.5in}
+\usepackage[usenames]{color}
+
+%% put ruler down the side for draft, and color it gray
+\usepackage{vruler}
+\setvruler[10pt][1][1][4][1][20pt][20pt][0pt][\textheight]
+\let\orgfillzeros\fillzeros 
+\def\fillzeros[#1]#2{% 
+  \begingroup 
+    \color[rgb]{0.8,0.8,0.8}% 
+    \orgfillzeros[{#1}]{#2}% 
+  \endgroup 
+}
+
+%% Next, load commenting code
+\input{commenting.tex}
+\end_preamble
+\use_default_options true
+\begin_modules
+theorems-ams
+theorems-ams-extended
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 0
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset FormulaMacro
+\newcommand{\defas}{\vcentcolon=}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset FormulaMacro
+\newcommand{\st}{\,:\,}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset FormulaMacro
+\newcommand{\dist}{\ \sim\ }
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset FormulaMacro
+\newcommand{\given}{\mid}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset FormulaMacro
+\newcommand{\distiid}{\overset{iid}{\dist}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset FormulaMacro
+\newcommand{\distind}{\overset{ind}{\dist}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\Naturals}{\mathbb{N}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\Rationals}{\mathbb{Q}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\Reals}{\mathbb{R}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\BorelSets}{\mathcal{B}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\Nats}{\mathbb{N}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\Ints}{\mathbb{Z}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\NNInts}{\Ints_{+}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\NNExtInts}{\overline{\Ints}_{+}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\Cantor}{\2^{\mathbb{N}}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\NNReals}{\Reals_{+}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\as}{\textrm{ a.s.}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\epi}{\textrm{epi}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\intr}{\textrm{int}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\conv}{\textrm{conv}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\cone}{\textrm{cone}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\aff}{\textrm{aff}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\renewcommand{\cone}{\textrm{cone}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\dom}{\textrm{dom}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\cl}{\textrm{cl}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\ri}{\textrm{ri}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\grad}{\nabla}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\imp}{\Rightarrow}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\downto}{\!\downarrow\!}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\upto}{\!\uparrow\!}
+\end_inset
+
+
+\begin_inset FormulaMacro
+\newcommand{\AND}{\wedge}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\OR}{\vee}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\NOT}{\neg}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\PowerSet}{\mathcal{P}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\Measures}{\mathcal{M}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\ProbMeasures}{\mathcal{M}_{1}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\equaldist}{\overset{d}{=}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\inv}{^{-1}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\norm}[1]{\lVert#1 \rVert}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\event}[1]{\left\lbrace #1 \right\rbrace }
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\tuple}[1]{\langle#1 \rangle}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\bspace}{\Omega}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\bsa}{\mathcal{A}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\borelspace}{(\bspace,\bsa)}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\card}[1]{\##1}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\iid}{i.i.d.}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\gprocess}[2]{(#1)_{#2}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\nprocess}[3]{\gprocess{#1_{#3}}{#3 \in#2}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\process}[2]{\nprocess{#1}{#2}n}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Victor's definition preamble (modified to avoid conflict with Dan's)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\expect}{\mathbb{E}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\var}{{\rm \mbox{var}}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\equalas}{\overset{\mbox{a.s.}}{=}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\renewcommand{\iid}{\distiid}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\abs}[1]{\lvert#1 \rvert}
+{|#1|}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\renewcommand{\norm}[1]{\lVert#1\rVert}
+{\|#1\|}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\inedge}[1]{e_{#1}^{\mbox{in}}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\outedge}[1]{e_{#1}^{\mbox{out}}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\intd}{\mathrm{d}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\suchthat}{\mid}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\Pr}{{\rm P}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\prD}{{\rm p}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\PrPalm}[1]{\Pr_{#1}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\convPr}{\xrightarrow{\mbox{p}}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\floor}[1]{\lfloor#1\rfloor}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\asympLim}[1]{\ ,#1\rightarrow\infty}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\const}{\text{const}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+distributions
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\diriDist}{\mathrm{Diri}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\categDist}{\mathrm{Cat}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\betaDist}{\mathrm{Beta}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\bernDist}{\mathrm{Bern}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\binDist}{\mathrm{Bin}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\uniDist}{\mathrm{Uni}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\poiDist}{\mathrm{Poi}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\gammaDist}{\mathrm{Gamma}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\multiDist}{\mathrm{Multi}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\gamPoiDist}{\mathrm{GamPoi}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\diriMultiDist}{\mathrm{DiriMulti}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Title
+Gibbs Update for Bayesian Degree Corrected Stochastic Block Model
+\end_layout
+
+\begin_layout Standard
+The purpose of this document is to derive the update rule for the collapsed
+ Gibbs sampler for the Bayesian DCSBM.
+ That is, our goal is to find
+\begin_inset Formula 
+\begin{align*}
+\Pr(z_{i}=k\given A,z_{\backslash i}).
+\end{align*}
+
+\end_inset
+
+In fact, we actually only need this expression up to a normalization constant
+ that does not depend on 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ It will also ultimately be computationally convenient to work with logarithms
+ for the usual numerical stability reasons.
+ That is, we're looking for an expression 
+\begin_inset Formula $q(A,z_{\backslash i},k)$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\begin{align*}
+\log\Pr(z_{i}=k\given A,z_{\backslash i}) & =q(A,z_{\backslash i},k)+c(A,z_{\backslash i}).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+The Model
+\end_layout
+
+\begin_layout Standard
+Borrowing notation from the Bayesian DCSBM, the basic setup is a model for
+ multi-graphs:
+\begin_inset Formula 
+\begin{align*}
+z & \dist\diriDist(\alpha)\\
+(\phi_{i})_{z_{i}=l} & \dist\diriDist(\gamma1_{(n_{l})})\\
+\theta_{i} & =n_{z_{i}}\phi_{i}\\
+\eta_{lm} & \dist\gammaDist(\kappa,\lambda)\\
+A_{ij}\given\theta,\eta,z & \distind\poiDist(\eta_{z_{i}z_{j}}\theta_{i}\theta_{j}),\ i\neq j\\
+A_{ii}\given\theta,\eta,z & \distind\poiDist(\frac{1}{2}\eta_{z_{i}z_{i}}\theta_{i}^{2}).
+\end{align*}
+
+\end_inset
+
+Note that this differs from the infinite Bayesian DCSBM in that we've moved
+ to a fixed number of communities (Chinese restaraunt process replaced by
+ Dirichlet distribution); this doesn't really matter much --- it will turn
+ out that the Gibbs sampler update can be trivially adapted back to the
+ infinite model.
+ Note that the generative model conditional on 
+\begin_inset Formula $z,\phi,\eta$
+\end_inset
+
+ can equivalently be written as:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $E_{lm}\given\eta_{lm},z\dist\poiDist(n_{l}n_{m}\eta_{lm})$
+\end_inset
+
+ for 
+\begin_inset Formula $l\neq m$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $E_{ll}\given\eta_{ll},z\dist\poiDist(n_{l}^{2}\eta_{ll}/2)$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $(D_{i}+A_{ii})_{z_{i}=l}\given\phi,z,\sum_{m}E_{lm}+E_{ll}\dist\multiDist(\sum_{m}E_{lm}+E_{ll},(\phi_{i})_{z_{i}=l})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Assign termini uniformly at random consistent with the counts in 4
+\end_layout
+
+\begin_layout Standard
+Basically, we can view this model as first generating edges between communities
+ and then, conditional on those counts, distributing the edge-terminis among
+ the vertices within the community (the later implicitly exploiting the
+ relationship between the Poisson and Dirichlet distributions).
+\end_layout
+
+\begin_layout Section
+Gibbs Update 1
+\end_layout
+
+\begin_layout Standard
+The first step is
+\begin_inset Formula 
+\begin{align*}
+\Pr(z_{i}=k\given A,z_{\backslash i}) & \propto\Pr(A\given z_{\backslash i},z_{i}=k)\Pr(z_{i}=k\given z_{\backslash i}).
+\end{align*}
+
+\end_inset
+
+The second term is a straightforward Dirichlet-Multinomial calculation,
+ so our focus will be on the likelihood.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Symbol
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Meaning
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $d_{j}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+degree of vertex 
+\begin_inset Formula $j$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $d_{j\to m}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+number of edges of vertex 
+\begin_inset Formula $j$
+\end_inset
+
+ to community 
+\begin_inset Formula $m$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{lm}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+number of edges between communities 
+\begin_inset Formula $l$
+\end_inset
+
+ and 
+\begin_inset Formula $m$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $n_{l}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+number of vertices in community 
+\begin_inset Formula $l$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $n_{lm}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\begin{cases}
+n_{l}n_{m} & l\neq m\\
+n_{l}^{2}/2 & l=m
+\end{cases}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Notation for summary stats.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+After repeated failed attempts to derive a smarter update, lets just go
+ with the one from the original paper:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Pr(A\given z) & \propto\prod_{l\le m}G(\kappa,\lambda)^{-1}G(e_{lm}+\kappa,n_{lm}+\lambda)\\
+ & \cdot\prod_{l}\frac{B(\gamma1_{(n_{l})}+(d_{i}+A_{ii})_{i:z_{i}=l})}{B(\gamma1_{(n_{l})})}n_{l}^{\sum_{m}e_{lm}+e_{ll}}.
+\end{align*}
+
+\end_inset
+
+The basic update scheme works as follows:
+\end_layout
+
+\begin_layout Enumerate
+Remove vertex 
+\begin_inset Formula $v$
+\end_inset
+
+ from the graph
+\end_layout
+
+\begin_layout Enumerate
+Compute 
+\begin_inset Formula $q(k)=\log\Pr(A_{\backslash v},A_{v}\given z_{\backslash v},z_{v}=k)+\mbox{const}$
+\end_inset
+
+ for each community 
+\begin_inset Formula $k$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Compute 
+\begin_inset Formula $r(k)=\log\Pr(z_{v}=k\given z_{\backslash v})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Sample community identity of 
+\begin_inset Formula $v$
+\end_inset
+
+ according to distribution 
+\begin_inset Formula $\mbox{softmax}(q+r)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Add vertex 
+\begin_inset Formula $v$
+\end_inset
+
+ back to the graph.
+\end_layout
+
+\begin_layout Standard
+The idea is to write update equations that depend on sufficient stats of
+ 
+\begin_inset Formula $A_{\backslash v}$
+\end_inset
+
+ that can be cheaply updated in the vertex removal and addition steps.
+ 
+\end_layout
+
+\begin_layout Standard
+To that end, taking the sufficient stats over 
+\begin_inset Formula $A_{\backslash v}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Pr(A_{\backslash v},A_{v}\given z_{\backslash v},z_{v}=k) & \propto\prod_{l\le m:l\neq k,m\neq k}G(\kappa,\lambda)^{-1}G(e_{lm}+\kappa,n_{lm}+\lambda)\\
+ & \cdot\prod_{m\neq k}G(\kappa,\lambda)^{-1}G(e_{km}+d_{v}^{(m)},n_{km}+\lambda+n_{m})\\
+ & \cdot G(\kappa,\lambda)^{-1}G(e_{kk}+d_{v}^{(k)},n_{kk}+\lambda+n_{k}+\frac{1}{2})\\
+ & \cdot\prod_{m\neq k}\frac{B(\gamma1_{(n_{m})}+(d_{i}+A_{ii}+A_{vi})_{i:z_{i}=m})}{B(\gamma1_{(n_{m})})}n_{m}^{\sum_{l}e_{ml}+e_{mm}+d_{v}^{(l)}}\\
+ & \cdot\frac{B(\gamma1_{(n_{k}+1)}+((d_{i}+A_{ii}+A_{vi})_{i:z_{i}=k},d_{v}+A_{vv}))}{B(\gamma1_{(n_{k}+1)})}(n_{k}+1)^{\sum_{l}e_{kl}+e_{kk}+d_{v}+d_{v}^{(k)}+A_{vv}}\\
+ & =\prod_{l\le m}G(\kappa,\lambda)^{-1}G(e_{lm}+\kappa,n_{lm}+\lambda)\\
+ & \cdot\prod_{m}\frac{B(\gamma1_{(n_{m})}+(d_{i}+A_{ii}+A_{vi})_{i:z_{i}=m})}{B(\gamma1_{(n_{m})})}\\
+ & \cdot\prod n_{m}^{\sum_{l}e_{ml}+e_{mm}+d_{v}^{(l)}}\\
+ & \cdot\prod_{m\neq k}G(e_{km}+\kappa+d_{v}^{(m)},n_{km}+\lambda+n_{m})/G(e_{km}+\kappa,n_{km}+\lambda)\\
+ & \cdot G(e_{kk}+\kappa+d_{v}^{(k)}+A_{vv},n_{kk}+\lambda+n_{k}+\frac{1}{2})/G(e_{kk}+\kappa,n_{kk}+\lambda)\\
+ & \cdot\frac{B(\gamma1_{(n_{k}+1)}+((d_{i}+A_{ii}+A_{vi})_{i:z_{i}=k},d_{v}+A_{vv}))}{B(\gamma1_{(n_{k})}+(d_{i}+A_{ii}+A_{vi})_{i:z_{i}=k})}\frac{B(\gamma1_{(n_{k})})}{B(\gamma1_{(n_{k}+1)})}\\
+ & \cdot(n_{k}+1)^{\sum_{l}e_{kl}+e_{kk}+d_{v}^{(k)}+d_{v}+A_{vv}}/n_{k}^{\sum_{l}e_{lk}+e_{kk}+d_{v}^{(k)}}
+\end{align*}
+
+\end_inset
+
+the point being that the first three terms are free of 
+\begin_inset Formula $k$
+\end_inset
+
+ and so do not carry any information about the update, and the remaining
+ terms are relatively simply functions of the hyper parameters and sufficient
+ stats of the graph
+\end_layout
+
+\begin_layout Standard
+Next,
+\begin_inset Formula 
+\begin{align*}
+GD(x,y,k,l)\defas\log\frac{G(x+k,y+l)}{G(x,y)} & =\log\frac{(y+l)^{-(x+k)}\Gamma(x+k)}{y^{-x}\Gamma(x)}\\
+ & =-(x+k)\log(y+l)+x\log y+\log\frac{\Gamma(x+k)}{\Gamma(x)}.
+\end{align*}
+
+\end_inset
+
+Similarly, define
+\begin_inset Formula 
+\begin{align*}
+BD(x,y)\defas\log\frac{B((x,y))}{B(x)} & =\log\Gamma(y)-\log\frac{\Gamma(\sum_{i}x_{i}+y)}{\Gamma(\sum_{i}x_{i})}
+\end{align*}
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\begin{align*}
+BD(\emptyset,y) & =0.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In totality,
+\begin_inset Formula 
+\begin{align*}
+\log\Pr(A,A_{v}\given z_{\backslash v},z_{v}=k) & =\mbox{const}\\
+ & +\sum_{m\neq k}GD(e_{km}+\kappa,n_{km}+\lambda,d_{v}^{(m)},n_{m})\\
+ & +GD(e_{kk}+\kappa,n_{kk}+\lambda,d_{v}^{(k)}+A_{vv},n_{k}+\frac{1}{2})\\
+ & +BD(\gamma1_{(n_{k})}+(d_{i}+A_{ii}+A_{vi})_{i:z_{i}=k},d_{v}+A_{vv}+\gamma)\\
+ & -BD(\gamma1_{(n_{k})},\gamma)\\
+ & +(d_{v}+A_{vv})\log(n_{k}+1)\\
+ & +(\sum_{l}e_{kl}+e_{kk}+d_{v}^{(k)})\log(1+\frac{1}{n_{k}}).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Imputation
+\end_layout
+
+\begin_layout Standard
+For graphs where self edges are not present the inference algorithm above
+ needs to treat them as latent parameters and draw them conditional on the
+ community assignments of the vertices.
+ The Bayesian DCSBM does this by drawing 
+\begin_inset Formula $\theta,\eta\given z$
+\end_inset
+
+ and then drawing according to 
+\begin_inset Formula $\Pr(A_{ii}\given\theta,\eta,z)$
+\end_inset
+
+.
+ I suspect that this really screws up the convergence of the sampler, but
+ I'm not totally sure.
+ Unfortunately, integrating out 
+\begin_inset Formula $\theta$
+\end_inset
+
+ and 
+\begin_inset Formula $\eta$
+\end_inset
+
+ is not super easy.
+ One option is to get the PMF by a symbolic algebra package and then implement
+ a custom sampler as described here: http://stackoverflow.com/questions/23276631/
+scipy-generating-custom-random-variable-from-pmf 
+\end_layout
+
+\end_body
+\end_document
