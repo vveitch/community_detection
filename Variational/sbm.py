@@ -1,34 +1,59 @@
-import edward as ed
 import numpy as np
 import tensorflow as tf
+import edward as ed
 
-from edward.models import Dirichlet, Categorical, Gamma, Poisson
+from edward.models import RandomVariable
+from tensorflow.contrib.distributions import Distribution
 
-sess = tf.InteractiveSession()
+from sbm_helpers import comp_edge_cts2, comp_nn
 
-# SBM parameters
-n_vert = 100
-n_comm = 3
+class SBM(RandomVariable, Distribution):
+    def __init__(self, zs, eta, n_comm, *args, **kwargs):
+        """
 
-alpha = tf.Variable(3.0,dtype=tf.float32)
-lam = tf.Variable(1,dtype=tf.float32)
-kap = tf.Variable(1,dtype=tf.float32)
+        :param zs:
+        :param eta:
+        :param n_comm:
+        :param args:
+        :param kwargs:
+        """
+        super(SBM, self).__init__(*args, **kwargs)
 
-# Model
-pi = Dirichlet(alpha=tf.ones([n_comm]))
-z = Categorical(p=tf.ones([n_vert, n_comm]) * pi) # z.sample().eval()
+    def _log_prob(self, A):
+        """
 
-eta = Gamma(tf.ones([n_comm, n_comm]), tf.ones([n_comm, n_comm]))
+        :param A: A 2-D 'tensor' representing adjacency matrix of graph; float32 for ease of tf
+        :return: _log_prob(X)
+        """
 
-# guess for how to proceed:
-# zz = tensorproduct(z,z)
-# zz = zz[upper_diag]
-# x = Poisson(lambda = tf.gather(eta,zz))
+        # number of edges between each pair of communities
+        ec = tf.py_func(comp_edge_cts2, [A, self.zs, self.n_comm], [tf.float32])
+        nn = tf.py_func(comp_nn, [self.zs, self.n_comm], [tf.float32])
 
-# Variational posterior
-qpi = Dirichlet( alpha = tf.Variable(tf.ones([n_comm])) )
-qz = Categorical( p = tf.Variable(tf.ones([n_comm])/n_comm))
-qeta = Gamma(tf.Variable(tf.ones([n_comm, n_comm])), tf.Variable(tf.ones([n_comm, n_comm])))
+        # unnormalized
+        lp = tf.reduce_sum(tf.matrix_band_part(ec*tf.log(self.eta) - self.eta * nn),0,-1)
 
-# Inference
-# TBD... presumably variational EM
+        # normalize
+        uppA = tf.matrix_band_part(A, 0, -1)
+        return lp - tf.reduce_sum(tf.diagpart(A)*tf.log(2.) + tf.lgamma(uppA+1.))
+
+    def _sample_n(self, n, seed=None):
+        # TBD: I'm not sure about the 'batch_shape' stuff... this may not be idiomatic w tf samplers
+
+        def np_one_samp(zs,eta):
+            n_vert = len(zs)
+            A = np.zeros([n_vert,n_vert])
+            for i in range(n_vert):
+                for j in range(i,n_vert):
+                    if 1 != j:
+                        A[i,j] = np.random.poisson(eta[zs[i],zs[j]])
+                        A[j,i] = A[i,j]
+                    else:
+                        A[i,i] = np.random.poisson(eta[zs[i],zs[j]] / 2.)
+
+            return A.astype(float)
+
+        def np_samp(n,zs,eta):
+            return np.array([np_one_samp(zs,eta)] for _ in range(n))
+
+        tf.py_func(np_samp, [n, self.zs, self.eta], tf.float32)
