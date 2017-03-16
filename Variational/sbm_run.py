@@ -7,7 +7,7 @@ from edward.models import Dirichlet, Categorical, Gamma, Poisson
 sess = tf.InteractiveSession()
 
 # SBM parameters
-n_vert = 100
+n_vert = 10
 n_comm = 3
 
 alpha = tf.Variable(3.0,dtype=tf.float32)

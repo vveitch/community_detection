@@ -54,6 +54,6 @@ class SBM(RandomVariable, Distribution):
             return A.astype(float)
 
         def np_samp(n,zs,eta):
-            return np.array([np_one_samp(zs,eta)] for _ in range(n))
+            return np.array([np_one_samp(zs,eta) for _ in range(n)])
 
         tf.py_func(np_samp, [n, self.zs, self.eta], tf.float32)
