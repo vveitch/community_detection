@@ -30,7 +30,7 @@ def comp_edge_cts2(A, z, n_comm):
                 edge_cts[k, l] = edge_cts[k, l] / 2
             edge_cts[l, k] = edge_cts[k, l]
 
-    return edge_cts.astype(float) # for compatability w tf ops
+    return edge_cts.astype(np.float32) # for compatability w tf ops
 
 
 def comp_nn(z, n_comm):
@@ -55,18 +55,12 @@ def comp_nn(z, n_comm):
     for k in range(n_comm):
         comm_idxs.append([i for i, zi in enumerate(z) if zi == k])  # vertices in community k
 
-    return nn.astype(float) # for compatability w tf ops
+    return nn.astype(np.float32) # for compatability w tf ops
 
 
-# # debugging code
-# # x=tf.tile(tf.reshape(samples,[-1,1]),[1,10]).eval()
-# A = tf.placeholder(tf.int64)
-# z = tf.placeholder(tf.int64)
-# n = tf.placeholder(tf.int64)
-# mytest = tf.py_func(comp_edge_cts,[A,z,n],tf.int64)
-#
+# # # debugging code
 # # or mb
 # AA = tf.tile(tf.reshape(tf.multinomial(tf.log([[10., 10.]]), 10),[-1,1]),[1,10])
 # zz = tf.multinomial(tf.log([[10., 10.]]), 10)[0]
 # nn = tf.constant(3,dtype=tf.int64)
-# mytest = tf.py_func(comp_edge_cts,[AA,zz,nn],tf.int64)
+# mytest = tf.py_func(comp_edge_cts2,[AA,zz,nn],tf.float32)

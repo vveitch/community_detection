@@ -4,11 +4,18 @@ import tensorflow as tf
 
 from edward.models import Dirichlet, Categorical, Gamma, Poisson
 
+# debugging
+import sys
+sys.path.append("/home/victor/Documents/community_detection/Variational")
+
+from sbm import SBM
+
 sess = tf.InteractiveSession()
 
 # SBM parameters
 n_vert = 10
 n_comm = 3
+n_comm_t = tf.constant(n_comm)
 
 alpha = tf.Variable(3.0,dtype=tf.float32)
 lam = tf.Variable(1,dtype=tf.float32)
@@ -20,10 +27,8 @@ z = Categorical(p=tf.ones([n_vert, n_comm]) * pi) # z.sample().eval()
 
 eta = Gamma(tf.ones([n_comm, n_comm]), tf.ones([n_comm, n_comm]))
 
-# guess for how to proceed:
-# zz = tensorproduct(z,z)
-# zz = zz[upper_diag]
-# x = Poisson(lambda = tf.gather(eta,zz))
+g = SBM(z,eta,3)
+
 
 # Variational posterior
 qpi = Dirichlet( alpha = tf.Variable(tf.ones([n_comm])) )

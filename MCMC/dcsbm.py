@@ -6,9 +6,9 @@ see accompanying documentation
 """
 
 import numpy as np
-
 import sys
-sys.path.append("/home/victor/Documents/brain-networks/community_detection")
+
+sys.path.append("/home/victor/Documents/community_detection/MCMC")
 from cgs_llhds import diri_multi_llhd
 from multi_sbm_helpers import comp_edge_cts, softmax
 from dcsbm_helpers import GD, BD, samp_shape_post_step, samp_rate_post_step, samp_gam_post_step
