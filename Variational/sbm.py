@@ -42,15 +42,15 @@ class SBM(Distribution):
             self._eta = ops.convert_to_tensor(eta, name="eta")
             self._n_comm = ops.convert_to_tensor(zs, name="n_comm")
 
-        super(SBM, self).__init__(
-            dtype=dtypes.float32,
-            reparameterization_type=distribution.NOT_REPARAMETERIZED,
-            validate_args=validate_args,
-            allow_nan_stats=allow_nan_stats,
-            parameters=parameters,
-            graph_parents=[self._zs, self._eta, self._n_comm],
-            name=name)
-            # *args, **kwargs)
+        # super(SBM, self).__init__(
+        #     dtype=dtypes.float32,
+        #     reparameterization_type=distribution.NOT_REPARAMETERIZED,
+        #     validate_args=validate_args,
+        #     allow_nan_stats=allow_nan_stats,
+        #     parameters=parameters,
+        #     graph_parents=[self._zs, self._eta, self._n_comm],
+        #     name=name)
+        #     # *args, **kwargs)
 
     def _sample_n(self, n=1, seed=None):
         # TBD: I'm not sure about the 'batch_shape' stuff... this may not be idiomatic w tf samplers
