@@ -2,7 +2,7 @@ import edward as ed
 import numpy as np
 import tensorflow as tf
 
-from edward.models import Dirichlet, Categorical, Gamma, Poisson
+from edward.models import Dirichlet, Categorical, Gamma
 
 # debugging
 import sys
@@ -20,16 +20,18 @@ lam = tf.Variable(1,dtype=tf.float32)
 kap = tf.Variable(1,dtype=tf.float32)
 
 # Model
+# communities
 pi = Dirichlet(alpha=tf.ones([n_comm]))
 z = Categorical(p=tf.ones([n_vert, n_comm]) * pi) # z.sample().eval()
 
+# comm-comm weights
 eta = Gamma(tf.ones([n_comm, n_comm]), tf.ones([n_comm, n_comm]))
 
 g = SBM(z,eta,3)
-x = g._sample_n(1)
 
+# inference
+# TODO
 sess = tf.InteractiveSession()
-print x.eval()
 
 # Variational posterior
 # qpi = Dirichlet( alpha = tf.Variable(tf.ones([n_comm])) )

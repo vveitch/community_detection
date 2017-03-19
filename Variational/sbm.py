@@ -1,59 +1,87 @@
 import numpy as np
 
 import tensorflow as tf
-from tensorflow.python.framework import dtypes
-from tensorflow.python.framework import ops
+import tensorflow
 
-import edward as ed
-
-from edward.models import RandomVariable
+from edward.models.random_variable import RandomVariable
 from tensorflow.contrib.distributions import Distribution
-from tensorflow.contrib.distributions.python.ops import distribution
 
 from sbm_helpers import comp_edge_cts2, comp_nn
 
-# class SBM(RandomVariable, Distribution):
-class SBM(Distribution):
+
+class SBM(RandomVariable, Distribution):
+
     def __init__(self,
                  zs,
                  eta,
                  n_comm,
                  validate_args=False,
                  allow_nan_stats=True,
-                 name="SBM"):
-                 # *args, **kwargs):
+                 name="SBM",
+                 value=None
+                 ):
         """
+        The (Poisson) stochastic block model.
 
-        :param zs:
-        :param eta:
-        :param n_comm:
-        :param dtype:
-        :param validate_args:
-        :param allow_nan_stats:
-        :param name:
-        :param args:
-        :param kwargs:
+        :param zs: tf.Tensor, 1-D; zs[v] is comm id of vertex v
+        :param eta: tf.Tensor, 2-D; eta[k,l] is expected number of edges between a vertex in comm l and one in comm k
+        :param n_comm: scalar, number of communities
         """
 
         parameters = locals()
 
-        with ops.name_scope(name, values=[zs, eta, n_comm]):
-            self._zs = ops.convert_to_tensor(zs, name="zs")
-            self._eta = ops.convert_to_tensor(eta, name="eta")
-            self._n_comm = ops.convert_to_tensor(zs, name="n_comm")
+        with tf.name_scope(name, values=[zs, eta, n_comm]) as ns:
+            # TODO: does this screw up composition?
+            with tf.control_dependencies([]):
+                self._zs = tf.convert_to_tensor(zs, name="zs", dtype=tf.int32)
+                self._eta = tf.convert_to_tensor(eta, name="eta", dtype=tf.float32)
+                self._n_comm = tf.convert_to_tensor(n_comm, name="n_comm", dtype=tf.int32)
 
-        # super(SBM, self).__init__(
-        #     dtype=dtypes.float32,
-        #     reparameterization_type=distribution.NOT_REPARAMETERIZED,
-        #     validate_args=validate_args,
-        #     allow_nan_stats=allow_nan_stats,
-        #     parameters=parameters,
-        #     graph_parents=[self._zs, self._eta, self._n_comm],
-        #     name=name)
-        #     # *args, **kwargs)
+        super(SBM, self).__init__(
+            dtype=tf.float32,
+            parameters=parameters,
+            is_continuous= False,
+            is_reparameterized=False,
+            validate_args=validate_args,
+            allow_nan_stats=allow_nan_stats,
+            name=ns,
+            value=value)
+
+    @property
+    def zs(self):
+        """Community ids."""
+        return self._zs
+
+    @property
+    def eta(self):
+        """Link weights"""
+        return self._eta
+
+    @property
+    def eta(self):
+        """number of communities"""
+        return self._n_comm
+
+    def _batch_shape(self):
+        return tf.convert_to_tensor(self.get_batch_shape())
+
+    def _get_batch_shape(self):
+        # TODO: not sure about this
+        return self._n_comm.get_shape()
+
+    def _event_shape(self):
+        return tf.convert_to_tensor(self.get_event_shape())
+
+    def _get_event_shape(self):
+        # TODO: check this works as expected with broadcasting
+        n_vert = self._zs.get_shape()[0]
+        return tf.TensorShape([n_vert, n_vert])
 
     def _sample_n(self, n=1, seed=None):
-        # TBD: I'm not sure about the 'batch_shape' stuff... this may not be idiomatic w tf samplers
+        # TODO: this won't broadcast correctly
+
+        if seed is not None:
+            raise NotImplementedError("seed is not implemented.")
 
         def np_one_samp(zs,eta):
             n_vert = len(zs)
@@ -73,11 +101,10 @@ class SBM(Distribution):
 
         return tf.py_func(np_samp, [n, self._zs, self._eta], [tf.float32])[0]
 
-
     def _log_prob(self, A):
         """
 
-        :param A: A 2-D 'tensor' representing adjacency matrix of graph; float32 for ease of tf
+        :param A: A 2-D 'tensor' representing adjacency matrix of graph; float32
         :return: _log_prob(X)
         """
 
