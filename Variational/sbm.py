@@ -108,17 +108,19 @@ class SBM(RandomVariable, Distribution):
         :return: _log_prob(X)
         """
 
+        At = tf.convert_to_tensor(A)
+
         zs = self._zs
         eta = self._eta
         n_comm = self._n_comm
 
         # number of edges between each pair of communities
-        ec = tf.py_func(comp_edge_cts2, [A, zs, n_comm], [tf.float32])[0]
+        ec = tf.py_func(comp_edge_cts2, [At, zs, n_comm], [tf.float32])[0]
         nn = tf.py_func(comp_nn, [zs, n_comm], [tf.float32])[0]
 
         # unnormalized
         lp = tf.reduce_sum(tf.matrix_band_part(ec * tf.log(eta) - eta * nn, 0, -1))
 
         # normalize
-        uppA = tf.matrix_band_part(A, 0, -1)
-        return lp - tf.reduce_sum(tf.diagpart(A) * tf.log(2.) + tf.lgamma(uppA + 1.))
+        uppA = tf.matrix_band_part(At, 0, -1)
+        return lp - tf.reduce_sum(tf.diag_part(At) * tf.log(2.) + tf.lgamma(uppA + 1.))
