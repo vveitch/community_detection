@@ -1,7 +1,6 @@
 import numpy as np
 
 import tensorflow as tf
-import tensorflow
 
 from edward.models.random_variable import RandomVariable
 from tensorflow.contrib.distributions import Distribution
@@ -10,7 +9,6 @@ from sbm_helpers import comp_edge_cts2, comp_nn
 
 
 class SBM(RandomVariable, Distribution):
-
     def __init__(self,
                  zs,
                  eta,
@@ -40,12 +38,17 @@ class SBM(RandomVariable, Distribution):
         super(SBM, self).__init__(
             dtype=tf.float32,
             parameters=parameters,
-            is_continuous= False,
+            is_continuous=False,
             is_reparameterized=False,
             validate_args=validate_args,
             allow_nan_stats=allow_nan_stats,
             name=ns,
             value=value)
+
+        # TODO: I put this in to mimic the behaviour of the tf distributions, but I dunno...
+        self._kwargs = {"zs": self._zs,
+                        "eta": self._eta,
+                        "n_comm": self._n_comm}
 
     @property
     def zs(self):
